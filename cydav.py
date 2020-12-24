@@ -105,20 +105,16 @@ class cdav:
 
     def GET(self, options: cdav_options, save_as: str):
 
-        try:
-            args = self.__create_args(options)
+        args = self.__create_args(options)
 
-            args.append("-o")
-            args.append("GET")
+        args.append("-o")
+        args.append("GET")
 
-            if save_as:
-                args.append("-s")
-                args.append(save_as)
+        if save_as:
+            args.append("-s")
+            args.append(save_as)
 
-            result = subprocess.check_output(args)
-
-        except Exception as ex:
-            return ex
+        result = subprocess.check_output(args)
 
         return result
 
@@ -126,20 +122,16 @@ class cdav:
 
     def PUT(self, options: cdav_options, upload_file: str):
 
-        try:
-            args = self.__create_args(options)
+        args = self.__create_args(options)
 
-            args.append("-o")
-            args.append("PUT")
+        args.append("-o")
+        args.append("PUT")
 
-            if upload_file:
-                args.append("-uf")
-                args.append(upload_file)
+        if upload_file:
+            args.append("-uf")
+            args.append(upload_file)
 
-            result = subprocess.check_output(args)
-
-        except Exception as ex:
-            return ex
+        result = subprocess.check_output(args)
 
         return result
 
@@ -147,24 +139,20 @@ class cdav:
 
     def PROPFIND(self, options: cdav_options, props: str, depth):
 
-        try:
-            args = self.__create_args(options)
+        args = self.__create_args(options)
 
-            args.append("-o")
-            args.append("PROPFIND")
+        args.append("-o")
+        args.append("PROPFIND")
 
-            if props:
-                args.append("-p")
-                args.append(props)
+        if props:
+            args.append("-p")
+            args.append(props)
 
-            if depth:
-                args.append("-d")
-                args.append(depth)
+        if depth:
+            args.append("-d")
+            args.append(depth)
 
-            result = subprocess.check_output(args)
-
-        except Exception as ex:
-            return ex
+        result = subprocess.check_output(args)
 
         return result
 
@@ -172,24 +160,20 @@ class cdav:
 
     def PROPPATCH(self, options: cdav_options, set_props: str, rm_props: str):
 
-        try:
-            args = self.__create_args(options)
+        args = self.__create_args(options)
 
-            args.append("-o")
-            args.append("PROPPATCH")
+        args.append("-o")
+        args.append("PROPPATCH")
 
-            if set_props:
-                args.append("-sp")
-                args.append(set_props)
+        if set_props:
+            args.append("-sp")
+            args.append(set_props)
 
-            if rm_props:
-                args.append("-rp")
-                args.append(rm_props)
+        if rm_props:
+            args.append("-rp")
+            args.append(rm_props)
 
-            result = subprocess.check_output(args)
-
-        except Exception as ex:
-            return ex
+        result = subprocess.check_output(args)
 
         return result
 
@@ -197,23 +181,19 @@ class cdav:
 
     def COPY(self, options: cdav_options, destination: str, no_overwrite: bool):
 
-        try:
-            args = self.__create_args(options)
+        args = self.__create_args(options)
 
-            args.append("-o")
-            args.append("COPY")
+        args.append("-o")
+        args.append("COPY")
 
-            if destination:
-                args.append("-da")
-                args.append(destination)
+        if destination:
+            args.append("-da")
+            args.append(destination)
 
-            if no_overwrite == True:
-                args.append("--no-overwrite")
+        if no_overwrite == True:
+            args.append("--no-overwrite")
 
-            result = subprocess.check_output(args)
-
-        except Exception as ex:
-            return ex
+        result = subprocess.check_output(args)
 
         return result
 
@@ -221,24 +201,19 @@ class cdav:
 
     def MOVE(self, options: cdav_options, destination: str, no_overwrite: bool):
 
-        try:
+        args = self.__create_args(options)
 
-            args = self.__create_args(options)
+        args.append("-o")
+        args.append("MOVE")
 
-            args.append("-o")
-            args.append("MOVE")
+        if destination:
+            args.append("-da")
+            args.append(destination)
 
-            if destination:
-                args.append("-da")
-                args.append(destination)
+        if no_overwrite == True:
+            args.append("--no-overwrite")
 
-            if no_overwrite == True:
-                args.append("--no-overwrite")
-
-            result = subprocess.check_output(args)
-
-        except Exception as ex:
-            return ex
+        result = subprocess.check_output(args)
 
         return result
 
@@ -246,29 +221,24 @@ class cdav:
 
     def LOCK(self, options: cdav_options, lock_scope: str, lock_owner: str, depth):
 
-        try:
+        args = self.__create_args(options)
 
-            args = self.__create_args(options)
+        args.append("-o")
+        args.append("LOCK")
 
-            args.append("-o")
-            args.append("LOCK")
+        if lock_scope:
+            args.append("-ls")
+            args.append(lock_scope)
 
-            if lock_scope:
-                args.append("-ls")
-                args.append(lock_scope)
+        if lock_owner:
+            args.append("-lo")
+            args.append(lock_owner)
 
-            if lock_owner:
-                args.append("-lo")
-                args.append(lock_owner)
+        if depth:
+            args.append("-d")
+            args.append(depth)
 
-            if depth:
-                args.append("-d")
-                args.append(depth)
-
-            result = subprocess.check_output(args)
-
-        except Exception as ex:
-            return ex
+        result = subprocess.check_output(args)
 
         return result
 
@@ -276,20 +246,15 @@ class cdav:
 
     def UNLOCK(self, options: cdav_options, lock_token: str):
 
-        try:
+        args = self.__create_args(options)
+        
+        args.append("-o")
+        args.append("UNLOCK")
 
-            args = self.__create_args(options)
-            
-            args.append("-o")
-            args.append("UNLOCK")
+        if lock_token:
+            args.append("-lt")
+            args.append(lock_token)
 
-            if lock_token:
-                args.append("-lt")
-                args.append(lock_token)
-
-            result = subprocess.check_output(args)
-
-        except Exception as ex:
-            return ex
+        result = subprocess.check_output(args)
 
         return result
